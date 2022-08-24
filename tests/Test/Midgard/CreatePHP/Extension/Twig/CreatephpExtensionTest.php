@@ -14,6 +14,8 @@ use Midgard\CreatePHP\Entity\PropertyInterface;
 
 use DOMDocument;
 use SimpleXMLElement;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class CreatephpExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -39,8 +41,8 @@ class CreatephpExtensionTest extends \PHPUnit_Framework_TestCase
         $xmlDriver = new RdfDriverXml(array(__DIR__.'/../../Metadata/rdf-twig'));
         $this->factory = new RdfTypeFactory($this->mapper, $xmlDriver);
 
-        $loader = new \Twig_Loader_Filesystem(__DIR__.'/templates');
-        $this->twig = new \Twig_Environment($loader);
+        $loader = new FilesystemLoader(__DIR__.'/templates');
+        $this->twig = new Environment($loader);
         $this->twig->addExtension(new CreatephpExtension($this->factory));
     }
 
